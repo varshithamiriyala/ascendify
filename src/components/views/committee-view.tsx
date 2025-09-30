@@ -26,7 +26,7 @@ export default function CommitteeView() {
   const successors = employeeProfiles.map(profile => {
     const user = allUsers.find(u => u.userId === profile.userId);
     return { ...profile, ...user };
-  });
+  }).sort((a, b) => b.readiness - a.readiness);
 
   return (
     <div className="space-y-6">
@@ -43,6 +43,7 @@ export default function CommitteeView() {
               <TableRow>
                 <TableHead className="w-[300px]">Employee</TableHead>
                 <TableHead>Target Role</TableHead>
+                <TableHead className="text-center">Readiness Score</TableHead>
                 <TableHead className="text-center">Readiness</TableHead>
                 <TableHead className="text-center">Gaps</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -64,9 +65,9 @@ export default function CommitteeView() {
                     </div>
                   </TableCell>
                   <TableCell>{s.targetRole}</TableCell>
+                   <TableCell className="text-center font-semibold">{s.readiness}%</TableCell>
                   <TableCell className="text-center">
                     <div className="flex items-center justify-center gap-2">
-                       <span className="font-semibold">{s.readiness}%</span>
                        <Progress value={s.readiness} className="h-2 w-24" />
                     </div>
                   </TableCell>
