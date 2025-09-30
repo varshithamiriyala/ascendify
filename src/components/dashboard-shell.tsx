@@ -14,6 +14,7 @@ import {
   LineChart,
   Link,
   Upload,
+  Briefcase,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -152,7 +153,15 @@ export function DashboardShell() {
                 Dashboard
               </SidebarMenuButton>
             </SidebarMenuItem>
-             {user.role === 'admin' && (
+            {(user.role === 'admin' || user.role === 'committee') && (
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={() => router.push('/critical-roles')}>
+                  <Briefcase />
+                  Critical Roles
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )}
+             {(user.role === 'admin' || user.role === 'committee') && (
               <>
                  <SidebarMenuItem>
                   <SidebarMenuButton onClick={() => router.push('/analytics')}>
@@ -166,13 +175,15 @@ export function DashboardShell() {
                     Mentor Matching
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+              </>
+            )}
+            {user.role === 'admin' && (
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={() => router.push('/integrations')}>
                     <Upload />
                     Integrations
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              </>
             )}
           </SidebarMenu>
         </SidebarContent>

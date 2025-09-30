@@ -1,4 +1,4 @@
-import type { User, EmployeeProfile, Role } from './types';
+import type { User, EmployeeProfile, Role, DevelopmentActivity } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 const getUserAvatar = (id: string) => {
@@ -11,6 +11,18 @@ export const allUsers: User[] = [
   { id: '2', name: 'David Chen', email: 'david.chen@ascendify.com', role: 'employee', avatarUrl: getUserAvatar('user-2'), title: 'Product Manager' },
   { id: '3', name: 'Maria Garcia', email: 'committee@ascendify.com', role: 'committee', avatarUrl: getUserAvatar('user-3'), title: 'Director of Engineering' },
   { id: '4', name: 'Ben Carter', email: 'admin@ascendify.com', role: 'admin', avatarUrl: getUserAvatar('user-4'), title: 'HR Business Partner' },
+];
+
+export const developmentActivities: DevelopmentActivity[] = [
+    { id: 'd1', type: 'Training', title: 'Advanced System Design Course', status: 'In Progress' },
+    { id: 'd2', type: 'Project', title: 'Lead "Phoenix" feature development', status: 'Not Started' },
+    { id: 'd3', type: 'Mentorship', title: 'Mentorship with Principal Engineer', status: 'In Progress' },
+    { id: 'd4', type: 'Training', title: 'Agile Leadership Workshop', status: 'Completed' },
+    { id: 'd5', type: 'Training', title: 'Strategic Marketing Course', status: 'In Progress' },
+    { id: 'd6', type: 'Project', title: 'Spearhead Q3 product launch', status: 'Not Started' },
+    { id: 'd7', type: 'Training', title: 'Microservices Architecture Pattern', status: 'Not Started' },
+    { id: 'd8', type: 'Mentorship', title: 'Connect with a Senior PM', status: 'Not Started' },
+    { id: 'd9', type: 'Project', title: 'Infrastructure cost-saving initiative', status: 'Not Started' },
 ];
 
 export const employeeProfiles: EmployeeProfile[] = [
@@ -29,10 +41,10 @@ export const employeeProfiles: EmployeeProfile[] = [
       { id: 'e2', name: 'Design a major new service', acquired: false },
     ],
     developmentPlan: [
-      { id: 'd1', type: 'Training', title: 'Advanced System Design Course', status: 'In Progress' },
-      { id: 'd2', type: 'Project', title: 'Lead "Phoenix" feature development', status: 'Not Started' },
-      { id: 'd3', type: 'Mentorship', title: 'Mentorship with Principal Engineer', status: 'In Progress' },
-      { id: 'd4', type: 'Training', title: 'Agile Leadership Workshop', status: 'Completed' },
+      developmentActivities[0],
+      developmentActivities[1],
+      developmentActivities[2],
+      developmentActivities[3],
     ],
     recommendations: [
       { type: 'Training', title: 'Microservices Architecture Pattern', reason: 'To close the System Design gap.' },
@@ -57,8 +69,8 @@ export const employeeProfiles: EmployeeProfile[] = [
       { id: 'e3', name: 'Launch a new product line', acquired: false },
     ],
     developmentPlan: [
-        { id: 'd5', type: 'Training', title: 'Strategic Marketing Course', status: 'In Progress' },
-        { id: 'd6', type: 'Project', title: 'Spearhead Q3 product launch', status: 'Not Started' },
+      developmentActivities[4],
+      developmentActivities[5],
     ],
     recommendations: [],
     gamification: {
