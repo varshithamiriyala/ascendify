@@ -17,6 +17,7 @@ import {
   Briefcase,
   ListChecks,
   Network,
+  ClipboardCheck,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -168,6 +169,12 @@ export function DashboardShell() {
                   <SidebarMenuButton onClick={() => router.push('/learning-path')}>
                     <Network />
                     Learning Path
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/self-assessment')}>
+                    <ClipboardCheck />
+                    Self-Assessment
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </>
