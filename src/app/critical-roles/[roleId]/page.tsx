@@ -92,7 +92,7 @@ export default function PipelineDetailsPage() {
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-right">
-                                            <Button variant="ghost" size="sm">View Plan</Button>
+                                            <Button variant="ghost" size="sm" onClick={() => router.push(`/development-plan/${s.userId}`)}>View Plan</Button>
                                         </TableCell>
                                     </TableRow>
                                 ))
