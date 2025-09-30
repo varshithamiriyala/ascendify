@@ -1,6 +1,6 @@
-
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,12 @@ const criticalRoles = [
 ];
 
 export default function CriticalRolesPage() {
+  const router = useRouter();
+
+  const handleViewPipeline = (roleId: string) => {
+    router.push(`/critical-roles/${roleId}`);
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -70,7 +76,7 @@ export default function CriticalRolesPage() {
                         <Badge variant={role.ready2Years > 0 ? "default" : "secondary"}>{role.ready2Years}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm">View Pipeline</Button>
+                        <Button variant="ghost" size="sm" onClick={() => handleViewPipeline(role.id)}>View Pipeline</Button>
                       </TableCell>
                     </TableRow>
                   )
@@ -83,4 +89,3 @@ export default function CriticalRolesPage() {
     </div>
   );
 }
-
