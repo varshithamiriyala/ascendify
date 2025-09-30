@@ -11,6 +11,9 @@ import {
   Shield,
   User,
   Users,
+  LineChart,
+  Link,
+  Upload,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -149,6 +152,28 @@ export function DashboardShell() {
                 Dashboard
               </SidebarMenuButton>
             </SidebarMenuItem>
+             {user.role === 'admin' && (
+              <>
+                 <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/analytics')}>
+                    <LineChart />
+                    Analytics
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/mentor-matching')}>
+                    <Users />
+                    Mentor Matching
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/integrations')}>
+                    <Upload />
+                    Integrations
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </>
+            )}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
