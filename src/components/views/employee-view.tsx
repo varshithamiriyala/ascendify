@@ -3,7 +3,6 @@
 import { useUser } from '@/contexts/user-context';
 import {
   employeeProfiles,
-  learningPathSteps,
 } from '@/lib/data';
 import {
   Card,
@@ -19,8 +18,6 @@ import {
   Target,
   FlaskConical,
   Lightbulb,
-  CheckCircle2,
-  ListTodo,
 } from 'lucide-react';
 import { Progress } from '../ui/progress';
 import { Separator } from '../ui/separator';
@@ -86,71 +83,6 @@ export default function EmployeeView() {
                   {profile.gamification.points.toLocaleString()}
                 </p>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Development Plan Progress */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Development Plan Progress</CardTitle>
-            <CardDescription>
-              Track your activities towards your goal.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {profile.developmentPlan.map((activity) => (
-              <div key={activity.id}>
-                <div className="flex justify-between text-sm">
-                  <p className="font-medium">{activity.title}</p>
-                  <p className="text-muted-foreground">{activity.status}</p>
-                </div>
-                <Progress
-                  value={
-                    activity.status === 'Completed'
-                      ? 100
-                      : activity.status === 'In Progress'
-                      ? 50
-                      : 0
-                  }
-                  className="mt-2 h-2"
-                />
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        {/* AI Generated Learning Path */}
-        <Card>
-          <CardHeader>
-            <CardTitle>AI-Generated Learning Path</CardTitle>
-            <CardDescription>
-              Your personalized roadmap to success.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="relative space-y-8 pl-6 before:absolute before:inset-y-0 before:left-8 before:w-px before:bg-border">
-              {learningPathSteps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="absolute top-1 -left-[30px] z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                    <ListTodo className="h-5 w-5" />
-                  </div>
-                  <div className="ml-6">
-                    <h4 className="font-semibold">{step.title}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {step.description}
-                    </p>
-                    <ul className="mt-2 list-inside list-disc space-y-1 text-sm">
-                      {step.milestones.map((milestone, mIndex) => (
-                        <li key={mIndex} className="flex items-start">
-                          <CheckCircle2 className="mr-2 mt-1 h-4 w-4 flex-shrink-0 text-green-500" />
-                          <span>{milestone}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
             </div>
           </CardContent>
         </Card>

@@ -15,6 +15,8 @@ import {
   Link,
   Upload,
   Briefcase,
+  ListChecks,
+  Network,
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -153,6 +155,24 @@ export function DashboardShell() {
                 Dashboard
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+            {user.role === 'employee' && (
+              <>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/development-plan')}>
+                    <ListChecks />
+                    Development Plan
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                 <SidebarMenuItem>
+                  <SidebarMenuButton onClick={() => router.push('/learning-path')}>
+                    <Network />
+                    Learning Path
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </>
+            )}
+
             {(user.role === 'admin' || user.role === 'committee') && (
               <SidebarMenuItem>
                 <SidebarMenuButton onClick={() => router.push('/critical-roles')}>
