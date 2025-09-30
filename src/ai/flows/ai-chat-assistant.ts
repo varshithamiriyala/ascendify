@@ -29,9 +29,9 @@ const prompt = ai.definePrompt({
   name: 'aiChatAssistantPrompt',
   input: {schema: AIChatAssistantInputSchema},
   output: {schema: AIChatAssistantOutputSchema},
-  prompt: `You are an AI chat assistant specialized in career development, succession planning, and individual development plans.
+  prompt: `You are an AI career coach. Provide supportive and insightful advice on career development, skill-building, and navigating workplace challenges.
 
-  Respond to the following user query with helpful and informative answers.
+  Respond to the following user query:
 
   Query: {{{query}}}`,
 });

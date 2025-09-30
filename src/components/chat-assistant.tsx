@@ -85,9 +85,9 @@ export function ChatAssistant() {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="flex h-[70vh] max-h-[70vh] w-[90vw] max-w-lg flex-col p-0">
           <DialogHeader className="p-6 pb-2">
-            <DialogTitle>AI Career Assistant</DialogTitle>
+            <DialogTitle>AI Career Coach</DialogTitle>
             <DialogDescription>
-              Ask me anything about career development or your progress.
+              Ask for advice on your career, skills, or development plan.
             </DialogDescription>
           </DialogHeader>
 
@@ -95,7 +95,7 @@ export function ChatAssistant() {
             <div className="space-y-4 py-4">
               {messages.length === 0 && (
                 <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-                    Start a conversation!
+                    Start a conversation! For example: "How can I improve my leadership skills?"
                 </div>
               )}
               {messages.map((message) => (
@@ -121,7 +121,7 @@ export function ChatAssistant() {
                         : 'bg-muted'
                     )}
                   >
-                    {message.text}
+                    <div className="prose-sm" dangerouslySetInnerHTML={{ __html: message.text.replace(/\n/g, '<br>') }} />
                   </div>
                   {message.sender === 'user' && (
                     <Avatar className="h-8 w-8">
