@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
@@ -23,9 +24,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Progress } from '../ui/progress';
 import { WhatIfScenarioDialog } from '../what-if-scenario-dialog';
 import type { EmployeeProfile, User, DevelopmentActivity } from '@/lib/types';
+import { AlertTriangle, Users, Target } from 'lucide-react';
 
 
 export default function CommitteeView() {
+  const router = useRouter();
   const [selectedSuccessor, setSelectedSuccessor] = useState<(EmployeeProfile & User) | null>(null);
   const [isSimulationOpen, setSimulationOpen] = useState(false);
 
@@ -50,15 +53,56 @@ export default function CommitteeView() {
     }
   }
 
+  const averageReadiness = Math.round(successors.reduce((acc, s) => acc + s.readiness, 0) / successors.length);
 
   return (
     <>
       <div className="space-y-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Critical Roles at Risk</CardTitle>
+                    <AlertTriangle className="h-4 w-4 text-amber-500" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">1</div>
+                    <p className="text-xs text-muted-foreground">
+                        Role with no ready-now successors
+                    </p>
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total Successors</CardTitle>
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">{successors.length}</div>
+                    <p className="text-xs text-muted-foreground">
+                        Identified across all critical roles
+                    </p>
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Avg. Readiness</CardTitle>
+                    <Target className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className="text-2xl font-bold">{averageReadiness}%</div>
+                    <p className="text-xs text-muted-foreground">
+                        Average readiness of all successors
+                    </p>
+                </CardContent>
+            </Card>
+        </div>
+
+
         <Card>
           <CardHeader>
-            <CardTitle className="font-headline text-2xl">Successor Comparison</CardTitle>
+            <CardTitle>Successor Comparison</CardTitle>
             <CardDescription>
-              Review potential successors for key roles.
+              Review and compare potential successors for key roles.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -75,7 +119,7 @@ export default function CommitteeView() {
               </TableHeader>
               <TableBody>
                 {successors.map((s) => (
-                  <TableRow key={s.id}>
+                  <TableRow key={s.id} onClick={() => router.push(`/development-plan/${s.userId}`)} className="cursor-pointer">
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <Avatar>
@@ -99,7 +143,7 @@ export default function CommitteeView() {
                       <Badge variant="outline">{s.competencyGaps.length} Comp. / {s.experienceGaps.length} Exp.</Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button variant="outline" size="sm" onClick={() => handleSimulate(s)}>What-if Scenario</Button>
+                      <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); handleSimulate(s);}}>What-if Scenario</Button>
                     </TableCell>
                   </TableRow>
                 ))}
