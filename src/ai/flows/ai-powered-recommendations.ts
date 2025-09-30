@@ -42,8 +42,8 @@ const getTrainingRecommendation = ai.defineTool({
   return `Recommended Training for ${input.gap} to achieve ${input.targetRole}: [Placeholder Training]`;
 });
 
-const getMentorshipRecommendation = ai.defineTool({
-  name: 'getMentorshipRecommendation',
+const getMentorRecommendation = ai.defineTool({
+  name: 'getMentorRecommendation',
   description: 'Recommends mentors based on competency and experience gaps.',
   inputSchema: z.object({
     gap: z.string().describe('A specific competency or experience gap to address.'),
@@ -74,7 +74,7 @@ const recommendationPrompt = ai.definePrompt({
   name: 'recommendationPrompt',
   input: { schema: RecommendationInputSchema },
   output: { schema: RecommendationOutputSchema },
-  tools: [getTrainingRecommendation, getMentorshipRecommendation, getProjectRecommendation],
+  tools: [getTrainingRecommendation, getMentorRecommendation, getProjectRecommendation],
   system: `You are an AI career coach providing personalized recommendations for training, mentorship, and projects to address competency and experience gaps.
   The employee's goal is the target role: {{{targetRole}}}.
   Use the provided tools to identify specific opportunities that align with their development needs.
