@@ -17,6 +17,10 @@ const RecommendationInputSchema = z.object({
   competencyGaps: z.array(z.string()).describe('The competency gaps of the employee.'),
   experienceGaps: z.array(z.string()).describe('The experience gaps of the employee.'),
   targetRole: z.string().describe('The target role of the employee.'),
+  careerGoals: z.object({
+    shortTerm: z.string().describe('The employee\'s short-term career goals.'),
+    longTerm: z.string().describe('The employee\'s long-term career goals.'),
+  }).describe('The career goals of the employee.'),
 });
 export type RecommendationInput = z.infer<typeof RecommendationInputSchema>;
 
@@ -77,7 +81,8 @@ const recommendationPrompt = ai.definePrompt({
   tools: [getTrainingRecommendation, getMentorRecommendation, getProjectRecommendation],
   system: `You are an AI career coach providing personalized recommendations for training, mentorship, and projects to address competency and experience gaps.
   The employee's goal is the target role: {{{targetRole}}}.
-  Use the provided tools to identify specific opportunities that align with their development needs.
+  The employee's career goals are: Short-term: {{{careerGoals.shortTerm}}}, Long-term: {{{careerGoals.longTerm}}}.
+  Use the provided tools to identify specific opportunities that align with their development needs and career goals.
   Decide, based on the competency and experience gaps, whether a training, mentorship, or project opportunity would be most appropriate. 
   Return all three, but tailor the recommendation to focus on the most relevant type of opportunity.`,
   prompt: `Employee ID: {{{employeeId}}}

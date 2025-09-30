@@ -35,11 +35,17 @@ export interface Recommendation {
   reason: string;
 }
 
+export interface CareerGoals {
+  shortTerm: string;
+  longTerm: string;
+}
+
 export interface EmployeeProfile {
   id: string;
   userId: string;
   readiness: number;
   targetRole: string;
+  careerGoals: CareerGoals;
   competencyGaps: Competency[];
   experienceGaps: Experience[];
   developmentPlan: DevelopmentActivity[];

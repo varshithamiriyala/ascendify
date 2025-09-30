@@ -31,6 +31,10 @@ export const employeeProfiles: EmployeeProfile[] = [
     userId: '1',
     readiness: 72,
     targetRole: 'Senior Software Engineer',
+    careerGoals: {
+      shortTerm: 'Become proficient in system design and lead a small project.',
+      longTerm: 'Transition to a Senior Software Engineer role and mentor other engineers.',
+    },
     competencyGaps: [
       { id: 'c1', name: 'System Design', level: 3, target: 5 },
       { id: 'c2', name: 'Project Leadership', level: 2, target: 4 },
@@ -61,6 +65,10 @@ export const employeeProfiles: EmployeeProfile[] = [
     userId: '2',
     readiness: 65,
     targetRole: 'Senior Product Manager',
+    careerGoals: {
+      shortTerm: 'Gain a deeper understanding of market analysis and technical concepts.',
+      longTerm: 'Successfully launch a new product line as the lead PM.',
+    },
     competencyGaps: [
       { id: 'c4', name: 'Market Analysis', level: 3, target: 5 },
       { id: 'c5', name: 'Technical Acumen', level: 3, target: 4 },
